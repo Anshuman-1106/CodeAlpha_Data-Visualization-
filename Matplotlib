@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+categories = ['Q1', 'Q2', 'Q3', 'Q4']
+sales = [15000, 22000, 18000, 27000]
+
+plt.figure(figsize=(8, 5))
+bars = plt.bar(categories, sales, color=['#4C72B0','#55A868','#C44E52','#8172B2'], edgecolor='black')
+plt.title('Quarterly Sales Performance', fontsize=16, fontweight='bold')
+plt.xlabel('Quarter', fontsize=12)
+plt.ylabel('Sales ($)', fontsize=12)
+plt.ylim(0, 32000)
+
+# Add value labels on bars
+for bar in bars:
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 400,
+             f"${bar.get_height():,}", ha='center', fontsize=10)
+
+plt.tight_layout()
+plt.savefig('quarterly_sales.png', dpi=300)
+plt.show()
