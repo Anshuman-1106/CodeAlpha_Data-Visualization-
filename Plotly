@@ -1,0 +1,28 @@
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+
+df = px.data.gapminder()
+
+# 1️⃣ Animated Bubble Chart
+fig = px.scatter(
+    df, x='gdpPercap', y='lifeExp',
+    size='pop', color='continent',
+    hover_name='country',
+    animation_frame='year',
+    log_x=True,
+    title='Global Development: GDP vs Life Expectancy (1952–2007)',
+    labels={'gdpPercap': 'GDP Per Capita', 'lifeExp': 'Life Expectancy'}
+)
+fig.update_layout(title_font_size=18)
+fig.show()
+
+# 2️⃣ Interactive Line Chart
+df_country = df[df['country'].isin(['United States', 'India', 'China', 'Brazil'])]
+fig2 = px.line(
+    df_country, x='year', y='lifeExp',
+    color='country', markers=True,
+    title='Life Expectancy Trends by Country'
+)
+fig2.update_traces(line_width=2.5)
+fig2.show()
