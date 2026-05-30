@@ -1,0 +1,36 @@
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load sample dataset
+df = sns.load_dataset('tips')
+
+# 1️⃣ Distribution Plot
+plt.figure(figsize=(10, 6))
+sns.histplot(df['total_bill'], kde=True, color='steelblue', bins=20)
+plt.title('Distribution of Total Bills', fontsize=14, fontweight='bold')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Frequency')
+plt.show()
+
+# 2️⃣ Correlation Heatmap
+plt.figure(figsize=(8, 6))
+corr = df[['total_bill', 'tip', 'size']].corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', linewidths=0.5, fmt='.2f')
+plt.title('Correlation Heatmap', fontsize=14, fontweight='bold')
+plt.show()
+
+# 3️⃣ Box Plot — Comparing Groups
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='day', y='total_bill', hue='sex', data=df, palette='Set2')
+plt.title('Total Bill by Day and Gender', fontsize=14, fontweight='bold')
+plt.xlabel('Day of Week')
+plt.ylabel('Total Bill ($)')
+plt.legend(title='Gender')
+plt.show()
+
+# 4️⃣ Scatter Plot with Regression Line
+plt.figure(figsize=(9, 6))
+sns.regplot(x='total_bill', y='tip', data=df, scatter_kws={'alpha':0.5}, line_kws={'color':'red'})
+plt.title('Tip vs Total Bill (with Regression Line)', fontsize=14, fontweight='bold')
+plt.show()
